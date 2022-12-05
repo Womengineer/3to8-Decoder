@@ -1,16 +1,24 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity Multplexer4to1 is
-    Port ( S : in  STD_LOGIC_VECTOR (1 downto 0);
-           I : in  STD_LOGIC_VECTOR (3 downto 0);
-           Y : out  STD_LOGIC);
-end Multplexer4to1;
+entity decoder3to8 is
+    Port ( X : in  STD_LOGIC;
+           Y : in  STD_LOGIC;
+           Z : in  STD_LOGIC;
+           D : out  STD_LOGIC_VECTOR (7 downto 0));
+end decoder3to8;
 
-architecture Behavioral of Multplexer4to1 is
+architecture Behavioral of decoder3to8 is
 
 begin
 
-Y<=(S(1) AND S(0) AND I(3)) OR (S(1) AND (NOT S(0)) AND I(2)) OR ((NOT S(1)) AND S(0) AND I(1)) OR ((NOT S(1)) AND (NOT S(0)) AND I(0));
+D(0) <= ((NOT X) AND (NOT Y) AND (NOT Z));
+D(1) <= ((NOT X) AND (NOT Y) AND (Z));
+D(2) <= ((NOT X) AND (Y) AND (NOT Z));
+D(3) <= ((NOT X) AND (Y) AND (Z));
+D(4) <= ((X) AND (NOT Y) AND (NOT Z));
+D(5) <= ((X) AND (NOT Y) AND (Z));
+D(6) <= ((X) AND (Y) AND (NOT Z));
+D(7) <= ((X) AND (Y) AND (Z));
 
 end Behavioral;
