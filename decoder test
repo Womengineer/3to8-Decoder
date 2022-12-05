@@ -1,0 +1,56 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+ENTITY DecoderTest IS
+END DecoderTest;
+ 
+ARCHITECTURE behavior OF DecoderTest IS 
+ 
+    COMPONENT decoder3to8
+    PORT(
+         X : IN  std_logic;
+         Y : IN  std_logic;
+         Z : IN  std_logic;
+         D : OUT  std_logic_vector(7 downto 0)
+        );
+    END COMPONENT;
+   
+   signal X : std_logic := '0';
+   signal Y : std_logic := '0';
+   signal Z : std_logic := '0';
+
+   signal D : std_logic_vector(7 downto 0);
+	
+BEGIN
+ 
+   uut: decoder3to8 PORT MAP (
+          X => X,
+          Y => Y,
+          Z => Z,
+          D => D
+        );
+
+   stim_proc: process
+   begin		
+
+      wait for 100 ns;	
+		X<='0'; Y<='0'; Z<='0';
+		wait for 100 ns;	
+		X<='0'; Y<='0'; Z<='1';
+		wait for 100 ns;	
+		X<='0'; Y<='1'; Z<='0';
+		wait for 100 ns;	
+		X<='0'; Y<='1'; Z<='1';
+		wait for 100 ns;	
+		X<='1'; Y<='0'; Z<='0';
+		wait for 100 ns;	
+		X<='1'; Y<='0'; Z<='1';
+		wait for 100 ns;	
+		X<='1'; Y<='1'; Z<='0';
+		wait for 100 ns;	
+		X<='1'; Y<='1'; Z<='1';
+		
+      wait;
+   end process;
+
+END;
