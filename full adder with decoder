@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity FullAdderWhDecoder is
+    Port ( K : in  STD_LOGIC;
+           L : in  STD_LOGIC;
+           M : in  STD_LOGIC;
+           S : out  STD_LOGIC;
+           C : out  STD_LOGIC);
+end FullAdderWhDecoder;
+
+architecture Behavioral of FullAdderWhDecoder is
+
+component decoder3to8 is 
+port (X,Y,Z: in STD_LOGIC; D: out STD_LOGIC_VECTOR(7 downto 0));
+end component;
+
+signal W: STD_LOGIC_VECTOR (7 downto 0);
+
+begin
+
+G1: decoder3to8 port map (K,L,M,W);
+S<=W(1) OR W(2) OR W(4) OR W(7);
+C<=W(3) OR W(5) OR W(6) OR W(7);
+
+end Behavioral;
