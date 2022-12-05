@@ -1,0 +1,59 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY FullAdderWhDecoderTest IS
+END FullAdderWhDecoderTest;
+ 
+ARCHITECTURE behavior OF FullAdderWhDecoderTest IS 
+ 
+    COMPONENT FullAdderWhDecoder
+    PORT(
+         K : IN  std_logic;
+         L : IN  std_logic;
+         M : IN  std_logic;
+         S : OUT  std_logic;
+         C : OUT  std_logic
+        );
+    END COMPONENT;
+	 
+   signal K : std_logic := '0';
+   signal L : std_logic := '0';
+   signal M : std_logic := '0';
+
+   signal S : std_logic;
+   signal C : std_logic;
+	
+BEGIN
+
+   uut: FullAdderWhDecoder PORT MAP (
+          K => K,
+          L => L,
+          M => M,
+          S => S,
+          C => C
+        );
+
+   stim_proc: process
+   begin		
+	
+      wait for 100 ns;	
+		K<='0'; L<='0'; M<='0';
+		wait for 100 ns;	
+		K<='0'; L<='0'; M<='1';
+		wait for 100 ns;	
+		K<='0'; L<='1'; M<='0';
+		wait for 100 ns;	
+		K<='0'; L<='1'; M<='1';
+		wait for 100 ns;	
+		K<='1'; L<='0'; M<='0';
+		wait for 100 ns;	
+		K<='1'; L<='0'; M<='1';
+		wait for 100 ns;	
+		K<='1'; L<='1'; M<='0';
+		wait for 100 ns;	
+		K<='1'; L<='1'; M<='1';
+
+      wait;
+   end process;
+
+END;
