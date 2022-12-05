@@ -1,0 +1,16 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Multplexer4to1 is
+    Port ( S : in  STD_LOGIC_VECTOR (1 downto 0);
+           I : in  STD_LOGIC_VECTOR (3 downto 0);
+           Y : out  STD_LOGIC);
+end Multplexer4to1;
+
+architecture Behavioral of Multplexer4to1 is
+
+begin
+
+Y<=(S(1) AND S(0) AND I(3)) OR (S(1) AND (NOT S(0)) AND I(2)) OR ((NOT S(1)) AND S(0) AND I(1)) OR ((NOT S(1)) AND (NOT S(0)) AND I(0));
+
+end Behavioral;
