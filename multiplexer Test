@@ -1,0 +1,52 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+ENTITY Multiplexer4to1Test IS
+END Multiplexer4to1Test;
+ 
+ARCHITECTURE behavior OF Multiplexer4to1Test IS 
+ 
+    COMPONENT Multplexer4to1
+    PORT(
+         S : IN  std_logic_vector(1 downto 0);
+         I : IN  std_logic_vector(3 downto 0);
+         Y : OUT  std_logic
+        );
+    END COMPONENT;
+	 
+   signal S : std_logic_vector(1 downto 0) := (others => '0');
+   signal I : std_logic_vector(3 downto 0) := (others => '0');
+
+   signal Y : std_logic;
+ 
+BEGIN
+
+   uut: Multplexer4to1 PORT MAP (
+          S => S,
+          I => I,
+          Y => Y
+        );
+
+   stim_proc: process
+   begin		
+      wait for 100 ns;	
+		S(0)<='0'; S(1)<='0'; I(0)<='0'; I(1)<='0'; I(2)<='0'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='0'; S(1)<='0'; I(0)<='1'; I(1)<='0'; I(2)<='1'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='1'; S(1)<='0'; I(0)<='1'; I(1)<='0'; I(2)<='1'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='1'; S(1)<='0'; I(0)<='0'; I(1)<='1'; I(2)<='0'; I(3)<='1';
+		wait for 100 ns;	
+		S(0)<='0'; S(1)<='1'; I(0)<='0'; I(1)<='1'; I(2)<='0'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='0'; S(1)<='1'; I(0)<='1'; I(1)<='1'; I(2)<='1'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='1'; S(1)<='1'; I(0)<='1'; I(1)<='0'; I(2)<='0'; I(3)<='0';
+		wait for 100 ns;	
+		S(0)<='1'; S(1)<='1'; I(0)<='1'; I(1)<='1'; I(2)<='1'; I(3)<='1';
+		
+      wait;
+   end process;
+
+END;
